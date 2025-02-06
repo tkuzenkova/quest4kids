@@ -5,18 +5,20 @@ import { PAGE_PATH } from "@/core/consts/page-path";
 import { getPost, getPosts } from "@/core/services/posts/api";
 import { getDictionary } from "get-dictionary";
 
+interface PageProps {
+	params: Promise<{ postId: string }>;
+}
+
 export async function generateStaticParams() {
 	const posts = await getPosts();
-	return posts?.slice(0, 5).map((post: any) => ({ id: post.id.toString() }));
+	return posts?.map((post: { id: number }) => ({
+		postId: post.id.toString(),
+	}));
 }
 
 export const revalidate = 3600;
 
-export default async function PostPage({
-	params,
-}: {
-	params: { postId: string };
-}) {
+export default async function PostPage({ params }: PageProps) {
 	const { postId } = await params;
 	const post = await getPost(postId);
 	const dict = await getDictionary(DICTIONARY_PATH.COMMON);
