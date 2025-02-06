@@ -1,0 +1,4 @@
+export const COOKIES = {
+	DARK_MODE: "DARK_MODE",
+	NEXT_LOCALE: "NEXT_LOCALE",
+};
