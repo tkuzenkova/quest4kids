@@ -29,8 +29,8 @@
 	/* --color-bg: var(--background);
 	--color-text: var(--foreground); */
 
-	--color-primary-light: oklch(0.623 0.214 259.815);
-	--color-primary: oklch(0.546 0.245 262.881);
+	--color-primary-light: oklch(0.65 0.2 298.1);
+	--color-primary: oklch(0.57 0.25 293.1);
 	--color-primary-dark: oklch(0.424 0.199 265.638);
 	--color-secondary: oklch(0.705 0.213 27.518);
 	--color-accent: oklch(0.217 0.125 27.079);

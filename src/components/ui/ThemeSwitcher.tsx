@@ -4,18 +4,23 @@ import { COOKIES } from "@/core/consts/cookies";
 import { removeCookie, setCookie } from "@/core/utils/cookies";
 import { Button } from "@headlessui/react";
 import { MoonIcon, SunIcon } from "@heroicons/react/24/solid";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { ThemeContext } from "../providers/ThemeProvider";
 
 const ThemeSwitcher = ({ isDarkMode = false }: { isDarkMode: boolean }) => {
+	const { toggleTheme } = useContext(ThemeContext);
+
 	const [isDarkTheme, setIsDarkTheme] = useState<boolean>(isDarkMode);
 
 	useEffect(() => {
 		if (isDarkTheme) {
 			document.documentElement.classList.add("dark");
 			setCookie(COOKIES.DARK_MODE, isDarkTheme.toString());
+			toggleTheme(true);
 		} else {
 			document.documentElement.classList.remove("dark");
 			removeCookie(COOKIES.DARK_MODE);
+			toggleTheme(false);
 		}
 	}, [isDarkTheme]);
 

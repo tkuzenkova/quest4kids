@@ -57,14 +57,18 @@ export async function updateSession(request: NextRequest) {
 	}
 
 	if (!user && isPrivateRoute) {
-		// no user, potentially respond by redirecting the user to the login page
 		const url = request.nextUrl.clone();
 		url.pathname = PAGE_PATH.AUTH;
 		return NextResponse.redirect(url);
 	}
 
+	if (user && request.nextUrl.pathname === "/") {
+		const url = request.nextUrl.clone();
+		url.pathname = PAGE_PATH.DASHBOARD;
+		return NextResponse.redirect(url);
+	}
+
 	if (user && isPublicRoute) {
-		// no user, potentially respond by redirecting the user to the login page
 		const url = request.nextUrl.clone();
 		url.pathname = PAGE_PATH.DASHBOARD;
 		return NextResponse.redirect(url);

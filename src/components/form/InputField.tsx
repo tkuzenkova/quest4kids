@@ -4,7 +4,7 @@ import clsx from "clsx";
 import { FC } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 
-// TODO: Add readOnly, isDisabled props, styles for Dark Theme, focus styles, and validation logic
+// TODO: Add readOnly
 interface InputFieldProps {
 	label: string;
 	id: string;
@@ -13,6 +13,7 @@ interface InputFieldProps {
 	error?: string;
 	register: UseFormRegisterReturn;
 	isRequired?: boolean;
+	isDisabled?: boolean;
 	description?: string;
 	as?: "textarea";
 	isLoading?: boolean; // TODO: Add loading state and implement loading spinner
@@ -26,6 +27,7 @@ export const InputField: FC<InputFieldProps> = ({
 	error,
 	register,
 	isRequired = false,
+	isDisabled = false,
 	description = "",
 	as,
 	isLoading,
@@ -46,16 +48,18 @@ export const InputField: FC<InputFieldProps> = ({
 				</Description>
 				<Input
 					className={clsx(
-						"mt-3 block w-full rounded-lg border-none bg-slate-700/5 px-3 py-1.5 text-sm/6 text-slate-700 dark:bg-white/5 dark:text-white",
-						"focus:outline-primary/25 data-[focus]:outline-2 data-[focus]:-outline-offset-2 dark:focus:outline-white/25",
-						"data-[disabled]:bg-slate-200/10 dark:data-[disabled]:bg-white/10",
-						error ? "border-danger" : "",
+						"mb-1 mt-3 block w-full rounded-lg border-none px-4 py-3 text-base outline-2 -outline-offset-2",
+						"bg-slate-400/5 text-slate-700",
+						"dark:bg-white/15 dark:text-white",
+						"focus:outline-primary dark:focus:outline-white/25",
+						"disabled:bg-slate-700/2 disabled:outline-primary/20 dark:disabled:outline-white/1 dark:disabled:bg-white/5",
+						`${error ? "outline-danger/70" : "outline-primary/70 dark:outline-white/2"}`,
 					)}
 					id={id}
 					{...(as !== "textarea" && { type })}
 					placeholder={placeholder}
 					as={as}
-					disabled={isLoading}
+					disabled={isLoading || isDisabled}
 					{...register}
 				/>
 				{error && (

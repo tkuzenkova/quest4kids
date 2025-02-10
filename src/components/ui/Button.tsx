@@ -12,6 +12,7 @@ type ButtonProps = {
 	className?: string;
 	type?: "button" | "submit" | "reset";
 	href?: string;
+	variant?: "primary" | "secondary" | "danger";
 };
 
 const Button = ({
@@ -21,19 +22,28 @@ const Button = ({
 	className = "",
 	type = "button",
 	href,
+	variant = "primary",
 }: ButtonProps) => {
+	const baseStyles =
+		"inline-flex cursor-pointer items-center gap-2 rounded-md px-5 py-2 text-base font-semibold shadow-inner ";
+	const variantStyles = {
+		primary:
+			"text-white shadow-white/10 data-[hover]:bg-primary/80 bg-gradient-to-b from-primary to-primary/60",
+		secondary:
+			"bg-blue-500 text-white shadow-blue-500/50 data-[hover]:bg-blue-400",
+		danger: "bg-red-500 text-white shadow-red-500/50 data-[hover]:bg-red-400",
+	};
+
+	const combinedStyles = `${baseStyles} ${variantStyles[variant]} ${className}`;
+
 	return href ? (
-		<Link
-			aria-label={ariaLabel}
-			className={`inline-flex cursor-pointer items-center gap-2 rounded-md bg-gray-700 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 hover:bg-gray-600 focus:outline-none focus:outline-1 focus:outline-white data-[open]:bg-gray-700 ${className}`}
-			href={href}
-		>
+		<Link aria-label={ariaLabel} className={combinedStyles} href={href}>
 			{children}
 		</Link>
 	) : (
 		<HeadlessuiButton
 			aria-label={ariaLabel}
-			className={`inline-flex cursor-pointer items-center gap-2 rounded-md bg-gray-700 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[open]:bg-gray-700 data-[focus]:outline-1 data-[focus]:outline-white ${className}`}
+			className={combinedStyles}
 			onClick={onClick}
 			type={type}
 		>

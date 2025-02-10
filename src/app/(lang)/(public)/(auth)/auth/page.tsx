@@ -9,11 +9,11 @@ export default function AuthPage() {
 		<>
 			<Heading>Login</Heading>
 			<LoginForm />
-			<div className="mt-4">
+			<div className="mt-4 text-center">
 				Don't have an account?&nbsp;
 				<LinkComponent href={PAGE_PATH.SIGNUP}>Sign Up</LinkComponent>
 			</div>
-			<div className="mt-4">
+			<div className="mt-8 text-center">
 				<GoogleLoginButton />
 			</div>
 		</>

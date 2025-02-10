@@ -6,6 +6,9 @@ import { getPosts } from "@/core/services/posts/api";
 import { getDictionary } from "get-dictionary";
 import PostsList from "../../../_components/PostsList";
 
+export const dynamic = "force-static";
+export const revalidate = 3600;
+
 export default async function PostsPage() {
 	const dic = await getDictionary(DICTIONARY_PATH.POSTS);
 	const posts = await getPosts();

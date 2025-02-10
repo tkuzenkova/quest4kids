@@ -7,6 +7,12 @@ export default function GoogleLoginButton() {
 	const signInWithGoogle = async () => {
 		const { error } = await supabase.auth.signInWithOAuth({
 			provider: "google",
+			options: {
+				queryParams: {
+					access_type: "offline",
+					prompt: "consent",
+				},
+			},
 		});
 
 		if (error) {
@@ -15,13 +21,11 @@ export default function GoogleLoginButton() {
 	};
 
 	return (
-		<div className="flex h-screen items-center justify-center">
-			<Button
-				onClick={signInWithGoogle}
-				className="rounded-lg bg-blue-500 px-6 py-3 text-white data-[hover]:bg-blue-400"
-			>
-				Login with Google
-			</Button>
-		</div>
+		<Button
+			onClick={signInWithGoogle}
+			className="rounded-lg bg-blue-500 px-6 py-3 text-white data-[hover]:bg-blue-400"
+		>
+			Login with Google
+		</Button>
 	);
 }
