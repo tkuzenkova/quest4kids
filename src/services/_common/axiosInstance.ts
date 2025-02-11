@@ -9,7 +9,7 @@ type Data = { message: string };
 
 // Create an Axios instance
 const instance: AxiosInstance = axios.create({
-	baseURL: process.env.NEXT_PUBLIC_API_URL,
+	// baseURL: process.env.NEXT_PUBLIC_API_URL,
 	timeout: 10000,
 	headers: {
 		"Content-Type": "application/json",
@@ -20,12 +20,12 @@ const instance: AxiosInstance = axios.create({
 instance.interceptors.request.use(
 	(config: InternalAxiosRequestConfig) => {
 		// Example: Add authorization token to headers if available
-		if (typeof window !== "undefined" && window.localStorage) {
-			const token = localStorage.getItem("token");
-			if (token) {
-				config.headers.Authorization = `Bearer ${token}`;
-			}
-		}
+		// if (typeof window !== "undefined" && window.localStorage) {
+		// 	const token = localStorage.getItem("token");
+		// 	if (token) {
+		// 		config.headers.Authorization = `Bearer ${token}`;
+		// 	}
+		// }
 		return config;
 	},
 	(error: AxiosError) => {
@@ -49,7 +49,7 @@ instance.interceptors.response.use(
 				case 401:
 					console.error("Unauthorized (401): Please log in again.");
 					// Optional: Redirect to login or refresh token
-					localStorage.removeItem("token");
+					// localStorage.removeItem("token");
 					window.location.href = "/auth";
 					break;
 

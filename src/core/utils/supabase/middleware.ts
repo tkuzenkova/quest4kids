@@ -49,12 +49,12 @@ export async function updateSession(request: NextRequest) {
 		request.nextUrl.pathname.startsWith(route),
 	);
 
-	if (!user && !request.nextUrl.pathname.startsWith("/")) {
-		// no user, potentially respond by redirecting the user to the login page
-		const url = request.nextUrl.clone();
-		url.pathname = PAGE_PATH.HOME;
-		return NextResponse.redirect(url);
-	}
+	// if (!user && !request.nextUrl.pathname.startsWith("/")) {
+	// 	// no user, potentially respond by redirecting the user to the login page
+	// 	const url = request.nextUrl.clone();
+	// 	url.pathname = PAGE_PATH.HOME;
+	// 	return NextResponse.redirect(url);
+	// }
 
 	if (!user && isPrivateRoute) {
 		const url = request.nextUrl.clone();
@@ -62,13 +62,7 @@ export async function updateSession(request: NextRequest) {
 		return NextResponse.redirect(url);
 	}
 
-	if (user && request.nextUrl.pathname === "/") {
-		const url = request.nextUrl.clone();
-		url.pathname = PAGE_PATH.DASHBOARD;
-		return NextResponse.redirect(url);
-	}
-
-	if (user && isPublicRoute) {
+	if (user && (isPublicRoute || request.nextUrl.pathname === "/")) {
 		const url = request.nextUrl.clone();
 		url.pathname = PAGE_PATH.DASHBOARD;
 		return NextResponse.redirect(url);

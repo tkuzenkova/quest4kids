@@ -1,6 +1,7 @@
 import Header from "@/components/layout/Header";
 import Navigation from "@/components/layout/Navigation";
 import Logout from "@/components/ui/Logout";
+import UserAvatar from "@/components/ui/UserAvatar";
 import { DICTIONARY_PATH } from "@/core/consts/dictionary";
 import { PAGE_PATH } from "@/core/consts/page-path";
 import { getDictionary } from "get-dictionary";
@@ -21,7 +22,10 @@ export default async function Index(props: { children: React.ReactNode }) {
 			<Header>
 				<div className="flex w-full items-center justify-between gap-4 px-3">
 					<Navigation links={nav} />
-					<Logout text={dict["Logout"]} />
+					<div className="flex items-center gap-4">
+						<UserAvatar />
+						<Logout text={dict["Logout"]} />
+					</div>
 				</div>
 			</Header>
 			{children}

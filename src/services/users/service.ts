@@ -1,15 +1,15 @@
 import { API_PATH } from "../_common/consts";
 import { request } from "../_common/request";
 
-const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 type UserId = string;
+
+const API = process.env.NEXT_PUBLIC_API_URL;
 
 export const usersService = {
 	getUsers: async () => {
-		await delay(3000);
 		const options = {
 			method: "GET",
-			url: API_PATH.USERS,
+			url: `${API}/${API_PATH.USERS}`,
 		};
 
 		return request(options);

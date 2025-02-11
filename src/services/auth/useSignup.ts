@@ -11,7 +11,7 @@ export const useSignup = () => {
 		mutationFn: signupApi,
 		onSuccess: () => {
 			toast.success("Account was successfully created");
-			router.push(PAGE_PATH.DASHBOARD);
+			router.replace(PAGE_PATH.AUTH);
 		},
 		onError: error => {
 			toast.error(error.message);

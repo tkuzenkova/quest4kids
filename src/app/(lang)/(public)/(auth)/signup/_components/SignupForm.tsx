@@ -16,7 +16,7 @@ export default function SignupForm() {
 		reValidateMode: "onBlur",
 		mode: "onChange",
 		defaultValues: {
-			name: "",
+			fullName: "",
 			email: "",
 			password: "",
 			confirmPassword: "",
@@ -32,12 +32,15 @@ export default function SignupForm() {
 	};
 
 	return (
-		<form onSubmit={handleSubmit(onSubmit)} className="mx-auto w-full">
+		<form
+			onSubmit={handleSubmit(onSubmit)}
+			className="mx-auto flex w-full flex-col items-start gap-5"
+		>
 			<InputField
-				label="Name"
-				id="name"
-				register={register("name")}
-				error={errors.name?.message}
+				label="Full Name"
+				id="fullName"
+				register={register("fullName")}
+				error={errors.fullName?.message}
 				isRequired
 				isLoading={isLoading}
 			/>

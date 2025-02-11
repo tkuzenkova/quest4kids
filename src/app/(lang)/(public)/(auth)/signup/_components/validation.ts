@@ -2,7 +2,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 const singUpSchema = yup.object().shape({
-	name: yup.string().required("Name is required"),
+	fullName: yup.string().required("Name is required"),
 	email: yup.string().email().required("Email is required"),
 	password: yup
 		.string()

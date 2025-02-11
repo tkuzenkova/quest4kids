@@ -27,7 +27,10 @@ export default function LoginForm() {
 	};
 
 	return (
-		<form onSubmit={handleSubmit(onSubmit)} className="mx-auto w-full">
+		<form
+			onSubmit={handleSubmit(onSubmit)}
+			className="mx-auto flex w-full flex-col items-start gap-5"
+		>
 			<InputField
 				label="Email"
 				id="email"

@@ -1,8 +1,8 @@
 import { Description, Field, Input, Label } from "@headlessui/react";
-import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import { FC } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
+import ExclamationCircleIcon from "../icons/ExclamationCircleIcon";
 
 // TODO: Add readOnly
 interface InputFieldProps {
@@ -33,7 +33,7 @@ export const InputField: FC<InputFieldProps> = ({
 	isLoading,
 }) => {
 	return (
-		<div className="my-4 w-full max-w-md">
+		<div className="w-full max-w-md">
 			<Field>
 				<Label
 					htmlFor={id}
@@ -48,7 +48,7 @@ export const InputField: FC<InputFieldProps> = ({
 				</Description>
 				<Input
 					className={clsx(
-						"mb-1 mt-3 block w-full rounded-lg border-none px-4 py-3 text-base outline-2 -outline-offset-2",
+						"mt-3 block w-full rounded-lg border-none px-4 py-3 text-base outline-2 -outline-offset-2",
 						"bg-slate-400/5 text-slate-700",
 						"dark:bg-white/15 dark:text-white",
 						"focus:outline-primary dark:focus:outline-white/25",
@@ -67,7 +67,7 @@ export const InputField: FC<InputFieldProps> = ({
 					<div className="pointer-events-none flex items-center pr-3 text-sm/6">
 						<ExclamationCircleIcon
 							className="text-danger mr-2 h-5 w-5"
-							aria-hidden="true"
+							ariaHidden
 						/>
 						{error}
 					</div>

@@ -1,12 +1,10 @@
 import { API_PATH } from "../_common/consts";
 import { request } from "../_common/request";
 
-// const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 type PostId = string;
 
 export const postsService = {
 	getPosts: () => {
-		// await delay(1000);
 		const options = {
 			method: "GET",
 			url: API_PATH.POSTS,

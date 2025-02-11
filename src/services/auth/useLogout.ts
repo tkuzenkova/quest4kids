@@ -1,4 +1,3 @@
-import { PAGE_PATH } from "@/core/consts/page-path";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { logoutApi } from "./service";
@@ -11,7 +10,7 @@ export function useLogout() {
 		mutationFn: logoutApi,
 		onSuccess: () => {
 			queryClient.removeQueries();
-			router.push(PAGE_PATH.AUTH);
+			router.refresh();
 		},
 	});
 

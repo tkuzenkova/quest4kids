@@ -1,5 +1,5 @@
+import CakeIcon from "@/components/icons/CakeIcon";
 import { getRandomTransparentColor } from "@/core/utils/common";
-import { CakeIcon } from "@heroicons/react/24/outline";
 import React from "react";
 
 const PostsHeader: React.FC = () => {

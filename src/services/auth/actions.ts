@@ -7,13 +7,6 @@ import { redirect } from "next/navigation";
 export async function login(formData: ILoginFormValues) {
 	const supabase = await createClient();
 
-	// type-casting here for convenience
-	// in practice, you should validate your inputs
-	// const data = {
-	// 	email: formData.get("email") as string,
-	// 	password: formData.get("password") as string,
-	// };
-
 	const { error } = await supabase.auth.signInWithPassword(formData);
 
 	if (error) {
@@ -24,14 +17,13 @@ export async function login(formData: ILoginFormValues) {
 	redirect("/");
 }
 
-export async function signup(formData: FormData) {
+export async function signup(formData: ISignupFormValues) {
 	const supabase = await createClient();
 
-	// type-casting here for convenience
-	// in practice, you should validate your inputs
 	const data = {
-		email: formData.get("email") as string,
-		password: formData.get("password") as string,
+		email: formData.email,
+		password: formData.password,
+		fullName: formData.fullName,
 	};
 
 	const { error } = await supabase.auth.signUp(data);
