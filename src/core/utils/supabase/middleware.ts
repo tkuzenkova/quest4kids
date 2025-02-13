@@ -1,7 +1,24 @@
 import { PRIVATE_ROUTES, PUBLIC_ROUTES } from "@/core/consts/routs";
+import { GeoLocationType } from "@/core/types/geoLocation";
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
-import { PAGE_PATH } from "../../consts";
+import { COOKIES, PAGE_PATH } from "../../consts";
+
+async function getGeoLocation(ip: string): Promise<GeoLocationType> {
+	// Check for local IP addresses
+	if (
+		ip === "::1" ||
+		ip.startsWith("192.168.") ||
+		ip.startsWith("10.") ||
+		ip.startsWith("172.16.")
+	) {
+		return { status: "fail", message: "local IP address", query: ip };
+	}
+
+	const response = await fetch(`http://ip-api.com/json/${ip}`);
+	const data = await response.json();
+	return data;
+}
 
 export async function updateSession(request: NextRequest) {
 	let supabaseResponse = NextResponse.next({
@@ -30,6 +47,16 @@ export async function updateSession(request: NextRequest) {
 			},
 		},
 	);
+
+	// Get user's IP address
+	const ip =
+		request.headers.get("x-forwarded-for") ||
+		request.headers.get("host") ||
+		"";
+	const geo = await getGeoLocation(ip);
+
+	// Set location in cookies
+	supabaseResponse.cookies.set(COOKIES.USER_LOCATION, JSON.stringify(geo));
 
 	// Do not run code between createServerClient and
 	// supabase.auth.getUser(). A simple mistake could make it very hard to debug

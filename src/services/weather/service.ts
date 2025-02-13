@@ -1,35 +1,18 @@
-import { API_PATH } from "../_common/consts";
 import { request } from "../_common/request";
 
-type PostId = string;
+// const WEATHER_API = "test";
+const WEATHER_API = process.env.NEXT_PUBLIC_WEATHER_API_URL;
+const WEATHER_API_KEY = process.env.NEXT_PUBLIC_WEATHER_API_KEY;
 
-export const postsService = {
-	getPosts: () => {
+export const weatherService = {
+	getCurrentWeather: (city: string) => {
+		const url = `${WEATHER_API}/weather/realtime?location=${city}&apikey=${WEATHER_API_KEY}`;
+
 		const options = {
 			method: "GET",
-			url: API_PATH.POSTS,
+			url,
 		};
 
 		return request(options);
-	},
-	getPost: (id: PostId) => {
-		// fetch user from the server by id
-	},
-	addPost: (post: IPostFormValues) => {
-		console.log(post);
-
-		const options = {
-			method: "POST",
-			url: API_PATH.POSTS,
-			body: JSON.stringify(post),
-		};
-
-		return request(options);
-	},
-	updatePost: (user: IUser) => {
-		// update user in the server
-	},
-	deletePost: (id: PostId) => {
-		// delete user from the server
 	},
 };

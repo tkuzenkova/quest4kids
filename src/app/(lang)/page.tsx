@@ -4,6 +4,7 @@ import { DICTIONARY_PATH } from "@/core/consts/dictionary";
 import { PAGE_PATH } from "@/core/consts/page-path";
 import { getPosts } from "@/core/services/posts/api";
 import { getDictionary } from "get-dictionary";
+import Link from "next/link";
 import PostsList from "../_components/PostsList";
 
 export default async function IndexPage() {
@@ -17,6 +18,9 @@ export default async function IndexPage() {
 			<main className="p-4">
 				<p>{dict["Home"]} page</p>
 				<div>Add navigation here</div>
+				<div>
+					<Link href="/weather">Weather</Link>
+				</div>
 				<div className="flex">
 					<Button href={PAGE_PATH.SIGNUP} className="mr-2">
 						{dict["Sign Up"]}

@@ -4,21 +4,12 @@
 @import "tailwindcss/preflight.css" layer(base);
 @import "tailwindcss/utilities.css" layer(utilities);
 
-.button {
-	color: #fff;
-	border-radius: 10px;
-	padding: 10px 20px;
-	padding-bottom: 12px;
-	background-color: rgb(67, 170, 39);
-	border: 2px solid rgb(29, 110, 7);
-	border-bottom-color: rgb(130, 255, 96);
-	border-right-color: rgb(130, 255, 96);
-	outline: 2px solid rgb(246, 246, 246);
-}
+.glass-bg {
+	background: radial-gradient(at 42% 45%, #31144d 0px, transparent 50%),
+		radial-gradient(at 94% 88%, #383863 0px, transparent 50%),
+		radial-gradient(at 82% 92%, #123328 0px, transparent 50%), #111f4d;
 
-.button:hover {
-	background-color: rgb(249, 253, 221);
-	color: #000;
+	color: #fff;
 }
 
 /* 

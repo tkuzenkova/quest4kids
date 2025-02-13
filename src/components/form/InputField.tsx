@@ -6,7 +6,7 @@ import ExclamationCircleIcon from "../icons/ExclamationCircleIcon";
 
 // TODO: Add readOnly
 interface InputFieldProps {
-	label: string;
+	label?: string;
 	id: string;
 	type?: string;
 	placeholder?: string;
@@ -17,6 +17,7 @@ interface InputFieldProps {
 	description?: string;
 	as?: "textarea";
 	isLoading?: boolean; // TODO: Add loading state and implement loading spinner
+	autoFocus?: boolean;
 }
 
 export const InputField: FC<InputFieldProps> = ({
@@ -31,18 +32,21 @@ export const InputField: FC<InputFieldProps> = ({
 	description = "",
 	as,
 	isLoading,
+	autoFocus,
 }) => {
 	return (
 		<div className="w-full max-w-md">
 			<Field>
-				<Label
-					htmlFor={id}
-					className="text-sm/6 font-medium text-slate-700 dark:text-white/50"
-				>
-					{label}
-					{/* TODO: Replace with custom component */}
-					{isRequired && <span className="text-danger"> *</span>}
-				</Label>
+				{label && (
+					<Label
+						htmlFor={id}
+						className="text-sm/6 font-medium text-slate-700 dark:text-white/50"
+					>
+						{label}
+						{/* TODO: Replace with custom component */}
+						{isRequired && <span className="text-danger"> *</span>}
+					</Label>
+				)}
 				<Description className="text-sm/6 text-slate-500 dark:text-white/50">
 					{description}
 				</Description>
@@ -60,6 +64,7 @@ export const InputField: FC<InputFieldProps> = ({
 					placeholder={placeholder}
 					as={as}
 					disabled={isLoading || isDisabled}
+					autoFocus={autoFocus}
 					{...register}
 				/>
 				{error && (
