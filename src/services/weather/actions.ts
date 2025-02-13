@@ -44,6 +44,8 @@ export async function getCurrentWeather(): Promise<{
 		// };
 		data = getMappedWeather(res);
 	} catch (err: any) {
+		console.log("error", err);
+
 		error = err.message || "An error occurred while fetching weather data.";
 	}
 

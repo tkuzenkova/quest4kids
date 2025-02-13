@@ -29,7 +29,17 @@ const SearchedWeather = () => {
 			setHistory(fiveElements);
 			setIsLoading(false);
 		};
+
 		loadHistory();
+
+		const broadcastChannel = new BroadcastChannel("weather-updates");
+		broadcastChannel.onmessage = () => {
+			loadHistory();
+		};
+
+		return () => {
+			broadcastChannel.close();
+		};
 	}, []);
 
 	return (

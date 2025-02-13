@@ -11,7 +11,7 @@ interface Props {
 }
 
 export default async function Index({ children }: Props) {
-	const { data: weather, error: weatherError } = await getCurrentWeather();
+	const { data: weather } = await getCurrentWeather();
 
 	return (
 		<div className="flex h-screen">
@@ -33,13 +33,10 @@ export default async function Index({ children }: Props) {
 				)}
 			>
 				<ThemeComponent />
-				{weather ? (
-					<WeatherProvider initialWeather={weather}>
-						<WeatherPage />
-					</WeatherProvider>
-				) : (
-					weatherError
-				)}
+
+				<WeatherProvider initialWeather={weather}>
+					<WeatherPage />
+				</WeatherProvider>
 			</main>
 		</div>
 	);

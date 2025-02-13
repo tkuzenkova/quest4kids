@@ -1,6 +1,8 @@
 const DB_NAME = "SearchWeatherDB";
 const STORE_NAME = "searchWeatherResults";
-const DB_VERSION = 2; // Збільшіть версію бази даних
+const DB_VERSION = 2;
+
+const broadcastChannel = new BroadcastChannel("weather-updates");
 
 export const openDB = () => {
 	return new Promise<IDBDatabase>((resolve, reject) => {
@@ -44,6 +46,7 @@ export const saveSearchResult = async (query: string, result: IWeather) => {
 
 				addRequest.onsuccess = () => {
 					console.log("Data added to the store", addRequest.result);
+					broadcastChannel.postMessage("update");
 				};
 
 				addRequest.onerror = () => {
